@@ -8,15 +8,20 @@ The purpose of this project was to analysis multiple stocks at the push of a but
 ## Results 
 ### 2017
 In Image ![2017 Results](https://user-images.githubusercontent.com/85718354/124306803-e879a280-db34-11eb-8600-2991b96032b7.JPG) the 12 stocks are shown comparing their Total Daily Volume as well as  the change in price from the first trade in 2017 compared to the last trade in 2017.  The last and first trades are calculated as follows within VBA.
+
 Starting Price
+```
 If Cells(j, 1).Value = tickerIndex And Cells(j - 1, 1).Value <> tickerIndex Then
 tickerStartingPrices = Cells(j, 6).Value
 End If
+```
 
 Ending Price
+```
 If Cells(j, 1).Value = tickerIndex And Cells(j + 1, 1).Value <> tickerIndex Then
 tickerEndingPrices = Cells(j, 6).Value
 End If
+```
 This formula is saying within the data provided, if the row before it is for the same ticker then there is still an earlier stock price and same for the ending price if there is a row with the same ticker afterwards.
 
 The data shows that stocks “FSLR” and  “SPWR” were the most traded stocks of this sample in 2017. The data also shows that in 2017 the stocks with the highest change in their values were “DQ” and “SEDG” both with returns over 180%. Vise vera we can see that “DQ” and “HASI” had the lowest volume of trades and “RUN” and “TERP” had the worst performance.  “DQ” is the stock that Steve’s parents were looking into, so while it did have one of the highest returns in 2017, it does not have the high trading volume that his parents were looking for. Overall, it should be noted that all but 1 stock in this year had a positive return, this can be a result of macro trends in the economy implying that the green energy sector was up in 2017.
@@ -28,15 +33,19 @@ This code was run in 1.21 seconds.
 In Image ![2018 Results](https://user-images.githubusercontent.com/85718354/124307473-dfd59c00-db35-11eb-82bf-d9f2ce72d4f2.JPG) this is showing the same 12 stocks as the 2017 analysis but for a more recent year. As shown in the image, 2018 was overall a worse year for these stocks given majority are showing red in the return column, meaning the price the company first traded within the year is lower than what it sold for in its last trade of the year. 
 
 Return each year is calculated using the below code taking the difference between the beginning and ending prices.
+```
 Cells(4 + i, 3).Value = ((tickerEndingPrices / tickerStartingPrices) - 1)
+```
 
 Top performers in terms of volume were “ENPH” and “SPWR” and performers in return were “ENPH” and “RUN”. Worst performers in volume were “AY” and “HASI” and for return were “DQ” and “JKS”. This shows a large contrast within “DQ” as this was the stock his parents were interested in, rising 199.4% in 2017 and then falling 62.6% in 2018. At a macro level all but 2 stocks had a negative return this year indicating that the green energy sector was down.
 
 Red and Green within the data set are assigned based on amounts greater than or less than zero using the following code. This is telling VBA if the return on the prices is greater than 0, meaning the ending price is higher than the starting price, to colour the cell green, and red if the ending price is lower than the starting. 
+```
 If Cells(i, 3) > 0 Then
 Cells(i, 3).Interior.Color = vbGreen
 Else: Cells(i, 3).Interior.Color = vbRed
 End If
+```
 This code was run in 1.20 seconds ![VBA_Challenge_2018](https://user-images.githubusercontent.com/85718354/124310704-950a5300-db3a-11eb-88fe-be248df1c28b.JPG)
 
 
@@ -53,6 +62,7 @@ Code refactoring is taking functioning code and modifying it. It is done with th
 ### Original and refactored VBA Script
 Within the stock analysis workbook, the original code has been refactored to run easier on the computers. This is done by introducing more variables per the below code and assigning those variables within the code to function per the below:
 
+```
 'Initialize array of all tickers so that they can be analyzed.
 Dim tickers(12) As String
     
@@ -83,6 +93,7 @@ tickerIndex = tickers(i)
 Dim tickerVolumes As Long
 Dim tickerStartingPrices As Single
 Dim tickerEndingPrices As Single
+```
 
 #### Advantages of the Original Script (No Refactoring)
 1. The original VBA script worked and functioned as was intended

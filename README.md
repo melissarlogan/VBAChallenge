@@ -55,7 +55,7 @@ End If
 
 ![2018 Results](https://user-images.githubusercontent.com/85718354/124307473-dfd59c00-db35-11eb-82bf-d9f2ce72d4f2.JPG)
 
-This code was run in 1.20 seconds before refactoring and in 0.19 after refactoring
+This code was run in 1.20 seconds before refactoring and in 0.19 after refactoring.
 
 ![VBA_Challenge_2018](https://user-images.githubusercontent.com/85718354/124848836-a81e8800-df6b-11eb-865d-761b7244841f.JPG)
 
@@ -110,7 +110,7 @@ Dim tickerEndingPrices(12) As Single
 1. The original VBA script worked and functioned as was intended meaning any changes will not impact the final result which was what Steve has requested.
 2. The original VBA ran in a reasonable amount of time to analyze 12 stocks. While the refactored script is faster, it took more time to refactor than it did to originally build.
 #### Disadvantages of the Original Script (With Refactoring)
-1. The original script while functioning for the 12 stocks, would be harder to add in 1000’s of stocks. With refactoring this code is now more scalable if Steve’s parents were looking to analyze more stocks. 
-2.  With refactoring more indicators (comments) of what the code is doing is added making it easier to read by the end user. The original code was written by one person and would have been easy for the one person to make changes, however by taking the time to edit and improve this allows a different user to make changes and understand what is happening and going to happen in the code.
+1. The original script while fast for the 12 stocks, would become much slower if adding in 1000’s of stocks. With refactoring this code it now runs more efficient so it could handle the increase in stocks to analyze.
+2.  With refactoring this allowed for the addition of more indicators (comments) of what the code is doing making it easier to read by the end user. The original code was written by one person and would have been easy for the one person to make changes; however, by taking the time to edit and improve the code this allows a different user to make changes and understand what is happening and going to happen in the code.
 
 

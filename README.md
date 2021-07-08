@@ -3,7 +3,7 @@
 ### Background
 Steve’s family is looking to invest in the stock market within green energy stocks specifically. The family; however, is only looking at one stock “DQ”. The below project expanded that research to analyze not only the "DQ" stock but several others to gage their performance over 2017 and 2018 to allow Steve’s family to make the best investing decision.
 ### Purpose
-The purpose of this project was to analysis multiple stocks at the push of a button to compare their year over year trends. This project also took that original analyzing code  and refactored it to improve the code. Refactoring makes the code run more efficiently using less steps or less memory and makes the code easier for anther developer to review and make changes to. By refactoring the code, it makes it easier on Steve’s computer to run the analysis and allows for more stocks to be added to the code in the future to analyze.
+The purpose of this project was to analysis multiple stocks at the push of a button to compare their year over year trends. This project also took that original analyzing code  and refactored it to improve the code to make it faster. Refactoring makes the code run more efficiently using less steps or less memory and makes the code easier for anther developer to review and make changes to. By refactoring the code, it makes it easier on Steve’s computer to run the analysis and allows for more stocks to be added to the code in the future to analyze.
 
 ## Results 
 ### 2017
@@ -11,16 +11,15 @@ In the below image the 12 stocks are shown comparing their Total Daily Volume as
 
 Starting Price
 ```
-If Cells(j, 1).Value = tickerIndex And Cells(j - 1, 1).Value <> tickerIndex Then
-tickerStartingPrices = Cells(j, 6).Value
+If Cells(i - 1, 1).Value <> tickers(tickerIndex) Then
+tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
 End If
 ```
 
 Ending Price
 ```
-If Cells(j, 1).Value = tickerIndex And Cells(j + 1, 1).Value <> tickerIndex Then
-tickerEndingPrices = Cells(j, 6).Value
-End If
+If Cells(i + 1, 1).Value <> tickers(tickerIndex) Then
+tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
 ```
 This formula is saying within the data provided, if the row before it is for the same ticker then there is still an earlier stock price and same for the ending price if there is a row with the same ticker afterwards. This code works given the list  we have is already in order by the stock tickers by days of the year it was traded.
 
@@ -28,7 +27,10 @@ The data shows that stocks “FSLR” and  “SPWR” were the most traded stock
 
 ![2017 Results](https://user-images.githubusercontent.com/85718354/124306803-e879a280-db34-11eb-8600-2991b96032b7.JPG) 
 
-This code was run in 1.21 seconds.
+This code was run in 1.21 seconds before the refactoring and in 0.15 seconds after refactoring.
+
+![VBA_Challenge_2017](https://user-images.githubusercontent.com/85718354/124848744-74dbf900-df6b-11eb-9aec-1c729664d600.JPG)
+
 
 
 ![VBA_Challenge_2017](https://user-images.githubusercontent.com/85718354/124310653-815eec80-db3a-11eb-95f5-b3c32f9caec5.JPG)
@@ -38,7 +40,7 @@ In the next image this is showing the same 12 stocks as the 2017 analysis but fo
 
 Return each year is calculated using the below code taking the difference between the beginning and ending prices.
 ```
-Cells(4 + i, 3).Value = ((tickerEndingPrices / tickerStartingPrices) - 1)
+Cells(4 + i, 3).Value = ((tickerEndingPrices(i) / tickerStartingPrices(i)) - 1)
 ```
 
 Top performers in terms of volume were “ENPH” and “SPWR” and performers in return were “ENPH” and “RUN”. Worst performers in volume were “AY” and “HASI” and for return were “DQ” and “JKS”. This shows a large contrast within “DQ” as this was the stock his parents were interested in, rising 199.4% in 2017 and then falling 62.6% in 2018. At a macro level all but 2 stocks had a negative return this year indicating that the green energy sector was down.
@@ -53,7 +55,10 @@ End If
 
 ![2018 Results](https://user-images.githubusercontent.com/85718354/124307473-dfd59c00-db35-11eb-82bf-d9f2ce72d4f2.JPG)
 
-This code was run in 1.20 seconds
+This code was run in 1.20 seconds before refactoring and in 0.19 after refactoring
+
+![VBA_Challenge_2018](https://user-images.githubusercontent.com/85718354/124848836-a81e8800-df6b-11eb-865d-761b7244841f.JPG)
+
 
 ![VBA_Challenge_2018](https://user-images.githubusercontent.com/85718354/124310704-950a5300-db3a-11eb-88fe-be248df1c28b.JPG)
 
@@ -93,20 +98,17 @@ tickers(11) = "VSLR"
 RowCount = Cells(Rows.Count, "A").End(xlUp).Row
     
 '1a) Create a ticker Index (make the ticker index move as the tickers increase)
-    
-For i = 0 To 11
-tickerIndex = tickers(i)
+tickerIndex = 0
 
-
-'1b) Create three output arrays.
-Dim tickerVolumes As Long
-Dim tickerStartingPrices As Single
-Dim tickerEndingPrices As Single
+'1b) Create three output arrays
+Dim tickerVolumes(12) As Long
+Dim tickerStartingPrices(12) As Single
+Dim tickerEndingPrices(12) As Single
 ```
 
 #### Advantages of the Original Script (No Refactoring)
 1. The original VBA script worked and functioned as was intended meaning any changes will not impact the final result which was what Steve has requested.
-2. The original VBA ran in a similar amount of time as the refactored script. While the refactored script is faster, the time it took to refactor only shaved partial seconds off the run time. For the analysis of 12 stocks this difference is not material. 
+2. The original VBA ran in a reasonable amount of time to analyze 12 stocks. While the refactored script is faster, it took more time to refactor than it did to originally build.
 #### Disadvantages of the Original Script (With Refactoring)
 1. The original script while functioning for the 12 stocks, would be harder to add in 1000’s of stocks. With refactoring this code is now more scalable if Steve’s parents were looking to analyze more stocks. 
 2.  With refactoring more indicators (comments) of what the code is doing is added making it easier to read by the end user. The original code was written by one person and would have been easy for the one person to make changes, however by taking the time to edit and improve this allows a different user to make changes and understand what is happening and going to happen in the code.
